@@ -58,15 +58,15 @@
       <h2>Add Employee</h2>
       <form action="post" class="employee_form">
         <label for="name">Name</label>
-        <input type="text" id="name">
+        <input type="text" id="name" class="input_box">
         <label for="role">Role</label>
-        <input type="text" id="role">
+        <input type="text" id="role" class="input_box">
         <label for="department">Department</label>
-        <input type="text" id="department">
+        <input type="text" id="department" class="input_box">
         <label for="email">Email</label>
-        <input type="email" id="email">
+        <input type="email" id="email" class="input_box">
         <label for="start_date">Join Date</label>
-        <input type="date" id="start_date">
+        <input type="date" id="start_date" class="input_box">
       </form>
       <div class="form-btn">
         <button class="save-button">
@@ -75,7 +75,29 @@
         <button class="cancel-btn" id="cancel-btn">Cancel</button>
       </div>
     </section>
+    <section class="PLV-Card">
+      <p>Pending Leave Requests</p>
+    </section>
   </main>
+  <aside>
+    <header class="aside-header">
+      <h1>HR Portal</h1>
+    </header>
+    <section class="aside-options">
+      <div>
+        <button>Dashboard</button>
+      </div>
+      <div>
+        <button>Employees</button>
+      </div>
+      <div>
+        <button>leave</button>
+      </div>
+      <div>
+        <button>Settings</button>
+      </div>
+    </section>
+  </aside>
   <script src="script.js"></script>
 </body>
 </html>
