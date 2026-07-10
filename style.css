@@ -73,6 +73,7 @@ main {
     text-align: center;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 .add-employee-form {
     display: none;
@@ -129,9 +130,11 @@ main {
 }
 .save-button:hover{
     background-color: rgb(49, 49, 96);
+    cursor: pointer;
 }
 .cancel-btn:hover{
     background-color: rgb(165, 165, 165);
+    cursor: pointer;
 }
 .PLV-Card{
     display: flex;
@@ -175,11 +178,11 @@ aside{
     align-items: center;
     gap: 4px;    
     padding: 4px;
+    cursor: pointer;
 }
 .aside-btn:hover{
-    background-color: rgb(202, 133, 43);
+    background-color: #c9a84c;
     border-radius: 8px;
-    border: solid 1px;
 }
 
 .dashboard-icon, .employee-icon, .leave-icon{
