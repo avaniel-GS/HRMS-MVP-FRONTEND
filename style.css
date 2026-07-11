@@ -60,19 +60,21 @@ main {
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 40px;
+    font-size: 20px;
+    text-align: center;
 }
 .add_button{
     background-color: rgb(15, 15, 58);
     color: #f5f5f5;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 25px;
     padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
 }
 .hamburger-btn {
@@ -144,6 +146,7 @@ main {
     align-items: center;
     margin-left: 10px;
     margin-top: 10px;
+    font-size: 20px;
 }
 aside{
     display: flex;
@@ -184,7 +187,7 @@ aside{
     cursor: pointer;
 }
 .aside-btn:hover{
-    background-color: #c9a84c;
+    background-color: #F0F9FF;
     border-radius: 8px;
 }
 
