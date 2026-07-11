@@ -200,6 +200,10 @@ aside{
     aside {
         width: 25%;
     }
+    .aside-btn {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
     .add-employee-form {
         width: 40%;
     }
