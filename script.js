@@ -27,7 +27,7 @@ function renderEmployeeCard(employee) {
     card.className = "employee-item-card";
     card.innerHTML = `
         <div class="employee-item-header">
-            <div classs="employee-item-icon">
+            <div class="employee-item-icon">
                 <p>${escapeHtml(employee.name[0])}</p>
             </div>
             <span class="employee-item-title">${escapeHtml(employee.name || "Unnamed employee")}</span>
