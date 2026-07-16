@@ -27,23 +27,25 @@ function renderEmployeeCard(employee) {
     card.className = "employee-item-card";
     card.innerHTML = `
         <div class="employee-item-header">
+            <div classs="employee-item-icon">
+                <p>${escapeHtml(employee.name[0])}</p>
+            </div>
             <span class="employee-item-title">${escapeHtml(employee.name || "Unnamed employee")}</span>
             <span class="employee-item-id">#${escapeHtml(employee.id ?? "")}</span>
         </div>
         <div class="employee-item-detail">
-            <span class="employee-item-label">Email</span>
-            <span class="employee-item-value">${escapeHtml(employee.email || "-")}</span>
-        </div>
-        <div class="employee-item-detail">
-            <span class="employee-item-label">Role</span>
             <span class="employee-item-value">${escapeHtml(employee.role || "-")}</span>
         </div>
         <div class="employee-item-detail">
-            <span class="employee-item-label">Department</span>
+            <img src="assets/department-icon.svg" alt="Department icon" class="employee-item-label">
             <span class="employee-item-value">${escapeHtml(employee.department || "-")}</span>
         </div>
         <div class="employee-item-detail">
-            <span class="employee-item-label">Date of joining</span>
+            <img src="assets/email-icon.svg" alt="Email icon" class="employee-item-label">
+            <span class="employee-item-value">${escapeHtml(employee.email || "-")}</span>
+        </div>
+        <div class="employee-item-detail">
+            <img src="assets/date_of_joining-icon.svg" alt="Date of joining icon" class="employee-item-label">
             <span class="employee-item-value">${escapeHtml(employee.date_of_joining || "-")}</span>
         </div>
     `;

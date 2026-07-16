@@ -179,10 +179,19 @@ main {
 
 .employee-item-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: 10px;
     margin-bottom: 4px;
+}
+
+.employee-item-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3b82f6;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 .employee-item-title {
@@ -198,15 +207,15 @@ main {
 
 .employee-item-detail {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    gap: 8px;
+    align-items: center;
+    margin-top: 2px;
 }
 
 .employee-item-label {
-    font-size: 0.8rem;
-    color: #6b7280;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    font-size: 4px;
+    width: 18px;
+    height: 18px;
 }
 
 .employee-item-value {
