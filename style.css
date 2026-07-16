@@ -297,10 +297,77 @@ aside{
     }
 }
 
+@media (max-width: 1024px) {
+    
+    aside {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 12px 20px;
+        box-sizing: border-box;
+    }
+
+    .aside-header {
+        margin-top: 0;
+        font-size: 20px;
+    }
+
+    .aside-options {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-left: 0;
+    }
+
+    .aside-btn {
+        width: auto;
+        margin: 0;
+        padding: 8px 12px;
+    }
+
+    main {
+        padding: 20px 20px 40px;
+    }
+
+    .data-cards {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+    }
+
+    .data-card {
+        width: auto;
+        min-height: 120px;
+    }
+
+    .add-employee-form {
+        width: min(70%, 440px);
+    }
+
+    /* .employee-cards / .employee-item-card intentionally left untouched here
+       so the horizontal scroll (nowrap, fixed-width cards) from the base
+       rules keeps working below 1024px too. */
+}
+
 @media (max-width: 768px) {
     .aside-btn {
         margin-left: 5px;
         margin-right: 40px;
+    }
+
+    .data-cards {
+        display: grid;
+
+    }
+
+    .add-employee-form {
+        width: min(90%, 420px);
+    }
+
+    .employee-item-card {
+        flex: 0 0 100%;
+        max-width: 100%;
     }
 }
 
@@ -316,6 +383,12 @@ aside{
         inset: 0;
         background: rgba(0, 0, 0, 0.35);
         z-index: 15;
+    }
+
+    .data-cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
     }
 
     .hamburger-btn {
