@@ -133,7 +133,7 @@ if (hamburger_btn && aside) {
 
     aside_buttons.forEach(function(button) {
         button.addEventListener("click", function() {
-            if (window.innerWidth <= 430) {
+            if (window.innerWidth <= 768) {
                 aside.classList.remove("open");
                 document.body.classList.remove("menu-open");
             }
@@ -141,14 +141,14 @@ if (hamburger_btn && aside) {
     });
 
     document.addEventListener("click", function(event) {
-        if (window.innerWidth <= 430 && aside.classList.contains("open") && !aside.contains(event.target) && !hamburger_btn.contains(event.target)) {
+        if (window.innerWidth <= 768 && aside.classList.contains("open") && !aside.contains(event.target) && !hamburger_btn.contains(event.target)) {
             aside.classList.remove("open");
             document.body.classList.remove("menu-open");
         }
     });
 
     window.addEventListener("resize", function() {
-        if (window.innerWidth > 430) {
+        if (window.innerWidth > 768) {
             aside.classList.remove("open");
             document.body.classList.remove("menu-open");
         }
