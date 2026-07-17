@@ -35,7 +35,6 @@ main {
     flex-wrap: wrap;
     margin: 0 auto;
     gap: 15px;
-    transition: all 0.3s ease;
     width: 100%;
 }
 
@@ -49,6 +48,7 @@ main {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     justify-content: center;
     align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .data-card .heading {
@@ -59,7 +59,7 @@ main {
 
 .data-card:hover {
     transform: scale(1.05);
-    transition: transform 0.3s ease;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
 }
 .Employee-card{
     display: flex;
@@ -186,6 +186,11 @@ main {
     gap: 8px;
     min-height: 170px;
     scroll-snap-align: start;
+    transition: transform 0.3s ease;
+}
+.employee-item-card:hover {
+    transform: scale(1.05);
+    
 }
 
 .employee-item-header {
@@ -389,6 +394,12 @@ aside{
 
     .employee-item-card {
         flex: 0 0 80%;
+        transition: none;
+    }
+
+    .employee-item-card:hover {
+        transform: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .data-card {
