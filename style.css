@@ -9,7 +9,6 @@ body {
     padding: 0;
     background-color: #fff;
     display: flex;
-    flex-direction: row-reverse;
     min-height: 100vh;
 }
 
