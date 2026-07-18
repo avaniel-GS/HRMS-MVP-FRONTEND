@@ -209,4 +209,39 @@ if (add_employee_form) {
     });
 }
 
+function get_employee_headcount() {
+    return fetch("http://127.0.0.1:8000/api/get_head_count",{
+            method: "GET",
+            mode: "cors",
+            headers: {
+                "Accept": "application/json"   
+            }
+        
+        })
+    .then(async response => {
+            const head_count = await response.text();
+            const responseData = parseJsonResponse(head_count);
+
+            if (!response.ok) {
+                throw new Error(response.status + ": " + JSON.stringify(responseData));
+            }
+            return responseData;
+        })
+        .then((responseData) => {
+            const totalHeadcountElement = document.getElementById("total-headcount");
+            if (!totalHeadcountElement) return;
+
+            const headcountValue = typeof responseData === "object" && responseData !== null
+                ? responseData.head_count ?? responseData.count ?? responseData.total ?? responseData.value ?? JSON.stringify(responseData)
+                : responseData;
+
+            if ("value" in totalHeadcountElement) {
+                totalHeadcountElement.value = headcountValue;
+            } else {
+                totalHeadcountElement.innerText = headcountValue;
+            }
+        })
+}
+
 loadEmployees();
+get_employee_headcount();
