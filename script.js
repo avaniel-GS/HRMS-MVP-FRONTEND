@@ -231,14 +231,54 @@ function get_employee_headcount() {
             const totalHeadcountElement = document.getElementById("total-headcount");
             if (!totalHeadcountElement) return;
 
-            const headcountValue = typeof responseData === "object" && responseData !== null
-                ? responseData.head_count ?? responseData.count ?? responseData.total ?? responseData.value ?? JSON.stringify(responseData)
-                : responseData;
+            const extractCount = (value) => {
+                if (value == null) return "";
+                if (typeof value === "number" || typeof value === "string") return value;
+                if (Array.isArray(value)) {
+                    const flat = value.flat(Infinity).find(item => typeof item === "number" || typeof item === "string");
+                    return flat ?? "";
+                }
+                if (typeof value === "object") {
+                    const candidate = value.head_count ?? value.count ?? value.total ?? value.value ?? value.Count;
+                    return extractCount(candidate);
+                }
+                return "";
+            };
 
-            if ("value" in totalHeadcountElement) {
-                totalHeadcountElement.value = headcountValue;
+            const rawCount = extractCount(responseData);
+            const numericCount = Number(rawCount);
+
+            const setHeadcountText = (value) => {
+                if ("value" in totalHeadcountElement) {
+                    totalHeadcountElement.value = value;
+                } else {
+                    totalHeadcountElement.innerText = value;
+                }
+            };
+
+            const animateHeadcount = (start, end) => {
+                const stepCount = Math.max(1, end - start);
+                const duration = 1200;
+                const interval = Math.max(40, Math.floor(duration / stepCount));
+                let current = start;
+
+                setHeadcountText(current);
+                const timer = setInterval(() => {
+                    current += 1;
+                    setHeadcountText(current);
+                    if (current >= end) {
+                        clearInterval(timer);
+                    }
+                }, interval);
+            };
+
+            if (Number.isFinite(numericCount) && numericCount >= 0) {
+                const count = Math.floor(numericCount);
+                const delta = Math.min(Math.max(1, Math.ceil(count * 0.2)), 20);
+                const start = Math.max(0, count - delta);
+                animateHeadcount(start, count);
             } else {
-                totalHeadcountElement.innerText = headcountValue;
+                setHeadcountText(String(rawCount));
             }
         })
 }
