@@ -209,6 +209,36 @@ if (add_employee_form) {
     });
 }
 
+function extractCountValue(value) {
+    if (value == null || value === "") return "";
+    if (typeof value === "number" && Number.isFinite(value)) return value;
+    if (typeof value === "string") {
+        const trimmed = value.trim();
+        if (/^-?\d+(\.\d+)?$/.test(trimmed)) {
+            return Number(trimmed);
+        }
+        return trimmed === "" ? "" : trimmed;
+    }
+    if (Array.isArray(value)) {
+        for (const item of value) {
+            const extracted = extractCountValue(item);
+            if (extracted !== "" && extracted != null) return extracted;
+        }
+        return "";
+    }
+    if (typeof value === "object") {
+        const candidateKeys = ["department_count", "departmentCount", "Count", "count", "head_count", "headCount", "total", "value"];
+        for (const key of candidateKeys) {
+            if (Object.prototype.hasOwnProperty.call(value, key)) {
+                const extracted = extractCountValue(value[key]);
+                if (extracted !== "" && extracted != null) return extracted;
+            }
+        }
+        return "";
+    }
+    return "";
+}
+
 function get_employee_headcount() {
     return fetch("http://127.0.0.1:8000/api/get_head_count",{
             method: "GET",
@@ -231,52 +261,15 @@ function get_employee_headcount() {
             const totalHeadcountElement = document.getElementById("total-headcount");
             if (!totalHeadcountElement) return;
 
-            const extractCount = (value) => {
-                if (value == null) return "";
-                if (typeof value === "number" || typeof value === "string") return value;
-                if (Array.isArray(value)) {
-                    const flat = value.flat(Infinity).find(item => typeof item === "number" || typeof item === "string");
-                    return flat ?? "";
-                }
-                if (typeof value === "object") {
-                    const candidate = value.head_count ?? value.count ?? value.total ?? value.value ?? value.Count;
-                    return extractCount(candidate);
-                }
-                return "";
-            };
-
-            const rawCount = extractCount(responseData);
+            const rawCount = extractCountValue(responseData);
             const numericCount = Number(rawCount);
 
             const setHeadcountText = (value) => {
-                if ("value" in totalHeadcountElement) {
-                    totalHeadcountElement.value = value;
-                } else {
-                    totalHeadcountElement.innerText = value;
-                }
-            };
-
-            const animateHeadcount = (start, end) => {
-                const stepCount = Math.max(1, end - start);
-                const duration = 1200;
-                const interval = Math.max(40, Math.floor(duration / stepCount));
-                let current = start;
-
-                setHeadcountText(current);
-                const timer = setInterval(() => {
-                    current += 1;
-                    setHeadcountText(current);
-                    if (current >= end) {
-                        clearInterval(timer);
-                    }
-                }, interval);
+                totalHeadcountElement.textContent = value;
             };
 
             if (Number.isFinite(numericCount) && numericCount >= 0) {
-                const count = Math.floor(numericCount);
-                const delta = Math.min(Math.max(1, Math.ceil(count * 0.2)), 20);
-                const start = Math.max(0, count - delta);
-                animateHeadcount(start, count);
+                setHeadcountText(Math.floor(numericCount));
             } else {
                 setHeadcountText(String(rawCount));
             }
@@ -305,52 +298,15 @@ function get_department_count() {
         const departmentCountElement = document.getElementById("dept-count");
         if (!departmentCountElement) return;
 
-        const extractCount = (value) => {
-            if (value == null) return "";
-            if (typeof value === "number" || typeof value === "string") return value;
-            if (Array.isArray(value)) {
-                const flat = value.flat(Infinity).find(item => typeof item === "number" || typeof item === "string");
-                return flat ?? "";
-            }
-            if (typeof value === "object") {
-                const candidate = value.department_count ?? value.departmentCount ?? value.count ?? value.total ?? value.value ?? value.DepartmentCount ?? value.Department_Count;
-                return extractCount(candidate);
-            }
-            return "";
-        };
-
-        const rawCount = extractCount(responseData);
+        const rawCount = extractCountValue(responseData);
         const numericCount = Number(rawCount);
 
         const setDepartmentCountText = (value) => {
-            if ("value" in departmentCountElement) {
-                departmentCountElement.value = value;
-            } else {
-                departmentCountElement.innerText = value;
-            }
-        };
-
-        const animateDepartmentCount = (start, end) => {
-            const stepCount = Math.max(1, end - start);
-            const duration = 1200;
-            const interval = Math.max(40, Math.floor(duration / stepCount));
-            let current = start;
-
-            setDepartmentCountText(current);
-            const timer = setInterval(() => {
-                current += 1;
-                setDepartmentCountText(current);
-                if (current >= end) {
-                    clearInterval(timer);
-                }
-            }, interval);
+            departmentCountElement.textContent = value;
         };
 
         if (Number.isFinite(numericCount) && numericCount >= 0) {
-            const count = Math.floor(numericCount);
-            const delta = Math.min(Math.max(1, Math.ceil(count * 0.2)), 20);
-            const start = Math.max(0, count - delta);
-            animateDepartmentCount(start, count);
+            setDepartmentCountText(Math.floor(numericCount));
         } else {
             setDepartmentCountText(String(rawCount));
         }
