@@ -199,7 +199,8 @@ if (add_employee_form) {
             alert("Employee added successfully!");
             add_employee_section.style.display = "none";
             add_employee_form.reset();
-
+            get_employee_headcount();
+            get_department_count();
             return loadEmployees();
         })
         .catch(error => {
